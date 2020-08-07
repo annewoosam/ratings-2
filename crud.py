@@ -79,13 +79,18 @@ def get_movies():
 # return movie by id
 def get_movie_by_id(movie_id):
 
-    return Movie.query.get(1)
+    return Movie.query.get(movie_id)
 
 # get all Users
 def get_users():
     """Return all movies."""
 
-    return Users.query.all()
+    return User.query.all()
+# return user by id for link
+
+def get_user_by_id(user_id):
+
+    return User.query.get(user_id)
 
 if __name__ == '__main__':
     from server import app

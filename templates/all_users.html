@@ -4,7 +4,9 @@
 {% block body %}
 {% for user in users %}
   <li>
-    {{ user.email }}
+    <a href="/users/{{ user.user_id }}">
+      {{ user.email }}
+    </a>
   </li>
 {% endfor %}
   </ul>
