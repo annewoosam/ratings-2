@@ -81,6 +81,12 @@ def get_movie_by_id(movie_id):
 
     return Movie.query.get(1)
 
+# get all Users
+def get_users():
+    """Return all movies."""
+
+    return Users.query.all()
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
