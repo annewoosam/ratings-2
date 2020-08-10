@@ -23,7 +23,39 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage."""
 
-    return render_template('homepage.html')
+    return render_template('login.html')
+
+@app.route('/users')
+def all_users():
+    """View all users."""
+
+    users = crud.get_users()
+
+    return render_template('all_users.html', users=users)
+
+@app.route('/register', methods=['POST'])
+
+def register_user():
+    """Create a new user."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+    passwd = crud.get_user_by_password(password)
+
+    if user:
+        
+        if passwd:
+            ('Log-in successful...')
+            return render_template('/homepage.html')
+        else:
+            flash('Please re-enter your password')
+            return render_template('/login.html')
+    else:
+        crud.create_user(email, password)
+        flash('Account created! Please log in.')
+        return render_template('/login.html')
 
 # app route for all movies
 @app.route('/movies')
@@ -44,14 +76,6 @@ def show_movie(movie_id):
     return render_template('movie_details.html', movie=movie)
 
 # app route for all movies
-
-@app.route('/users')
-def all_users():
-    """View all users."""
-
-    users = crud.get_users()
-
-    return render_template('all_users.html', users=users)
 
 @app.route('/users/<user_id>')
 def user_details(user_id):

@@ -32,8 +32,6 @@ import datetime
 
 """CRUD operations."""
 
-from model import db, User, Movie, Rating, connect_to_db
-
 
 def create_user(email, password):
     """Create and return a new user."""
@@ -86,11 +84,25 @@ def get_users():
     """Return all movies."""
 
     return User.query.all()
+
 # return user by id for link
 
 def get_user_by_id(user_id):
 
     return User.query.get(user_id)
+
+# return user by filter for e-mail
+
+def get_user_by_email(email):
+    """Return a user by email."""
+
+    return User.query.filter(User.email == email).first()
+
+def get_user_by_password(password):
+    """Return a user by email."""
+
+    return User.query.filter(User.password == password).first()
+
 
 if __name__ == '__main__':
     from server import app
